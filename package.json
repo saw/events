@@ -1,27 +1,25 @@
 {
-  "name": "react-events",
-  "version": "0.0.1",
-  "description": "react demo",
-  "main": "index.js",
+  "name": "events",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/saw/events.git"
-  },
-  "author": "Stephen Woods",
-  "bugs": {
-    "url": "https://github.com/saw/events/issues"
-  },
-  "homepage": "https://github.com/saw/events",
   "dependencies": {
+    "body-parser": "~1.10.2",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.1.1",
+    "ejs": "~2.1.4",
     "express": "^4.11.1",
     "express-session": "^1.10.1",
+    "mongoose": "^3.8.21",
+    "morgan": "~1.5.1",
+    "node-jsx": "^0.12.4",
     "passport": "^0.2.1",
     "passport-google": "^0.3.0",
     "path-to-regexp": "^1.0.3",
-    "react": "^0.12.2"
+    "react": "^0.12.2",
+    "serve-favicon": "~2.2.0"
   },
   "devDependencies": {
     "browserify": "^8.1.1",
