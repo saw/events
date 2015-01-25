@@ -9,6 +9,7 @@ var HelloMessage = React.createClass({
       return (
          <div>
             <h1>Hello World</h1>
+            <button onClick={this.doStuff}>Stuff</button>
          </div>
       );
    }
