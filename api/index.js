@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 var _ = require('lodash');
 var api = require('./api');
+var storage = require('./storage.js');
+storage.init().then(function() {
+	console.log('Storage engine ready');
+});
 
 router.get('/', function (req, res, next) {
 	res.status(403);
 	res.end('API method missing');
 });
-
-router.all('/:')
 
 router.all('/:namespace/:id?', function (req, res, next) {
 
@@ -20,9 +22,7 @@ router.all('/:namespace/:id?', function (req, res, next) {
 		paramData.id = req.params.id;
 	}
 
-	if(req.body) {
-		paramData = _.merge(paramData, req.body);
-	}
+	paramData = _.merge(paramData, req.body);
 
 	api.callMethod(req.params.namespace, method, paramData).then(function(resp, err) {
 		if(err) {

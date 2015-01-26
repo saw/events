@@ -1,4 +1,6 @@
 var Q = require('q');
+var storage = require('../storage.js');
+var _ = require('lodash');
 
 function makePromise() {
 	return Q.defer();
@@ -6,15 +8,17 @@ function makePromise() {
 
 module.exports = {
 	post: function(params) {
-		var p = makePromise();
-		process.nextTick(function(){
-			p.resolve({foo:'bar'});
-		});
-		return p.promise;
+		var doc = params;
+		console.log(params);
+		doc.collection = 'users';
+		return storage.insert(doc);
 	},
 
 	get: function(params) {
-		var p = makePromise();
-		
+		if(params.id) {
+			return storage.get(params.id);
+		} else {
+			return storage.find({collection:'users'});
+		}
 	}
 }

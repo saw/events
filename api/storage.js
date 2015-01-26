@@ -5,7 +5,7 @@ var db;
 function init() {
 	var p = Q.defer();
 	if(db) {
-		console.warn('db already init, skipping';
+		console.warn('db already init, skipping');
 		process.nextTick(function() {
 			p.resolve();
 		});
@@ -35,7 +35,7 @@ function get(id) {
 	db.find({_id:id}, function(err, doc) {
 		if(err) {
 			p.reject(new Error(err));
-		} ekse {
+		} else {
 			p.resolve(doc);
 		}
 	});
@@ -51,10 +51,12 @@ function find(query) {
 			p.resolve(doc);
 		}
 	});
+	return p.promise;
 }
 
 module.exports = {
 	init: init,
 	insert: insert,
-	get: get
-}
+	get: get,
+	find: find
+};
