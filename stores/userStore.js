@@ -1,0 +1,5 @@
+var UserStore = {
+
+
+	getUser: function
+}
