@@ -1,6 +1,10 @@
 module.exports = function(router) {
 
 	router.get('/', function (req, res) {
-	  	res.render('index', {name: 'bob', req: req.url, ctx:req.ctx});
+	  	res.render('index', {ctx:req.ctx});
 	});
+
+	router.get('/about', function (req, res) {
+		res.render('about', {ctx:req.ctx});
+	})
 }

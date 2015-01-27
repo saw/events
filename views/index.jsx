@@ -5,12 +5,11 @@ var SignIn = require('../components/SignIn.jsx');
 var HelloMessage = React.createClass({
 
    getInitialState: function() {
-      console.log('props', this.props.ctx);
       return {};
    },
 
    componentDidMount: function() {
-      console.log('reacting to awesomeness');
+
    },
 
    render: function() {
@@ -23,6 +22,7 @@ var HelloMessage = React.createClass({
       return (
          <div>
             <h1>Hello, {hello}</h1>
+            <a href="/about">about</a>
             <SignIn user={this.props.ctx.user}/>
             <button onClick={this.doStuff}>Stuff</button>
          </div>
@@ -30,7 +30,4 @@ var HelloMessage = React.createClass({
    }
 });
 
-module.exports = function(clientApp) {
-   app = clientApp;
-   return HelloMessage;
-}
+module.exports = HelloMessage;
