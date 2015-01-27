@@ -16,6 +16,7 @@ module.exports = {
 
 	get: function(params) {
 		if(params.id) {
+			console.log('looking for user', params.id);
 			return storage.get(params.id);
 		} else {
 			return storage.find({collection:'users'});

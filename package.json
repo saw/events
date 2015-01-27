@@ -17,6 +17,8 @@
     "morgan": "~1.5.1",
     "nedb": "^1.1.1",
     "node-jsx": "^0.12.4",
+    "passport": "^0.2.1",
+    "passport-google": "^0.3.0",
     "path-to-regexp": "^1.0.3",
     "q": "^1.1.2",
     "react": "^0.12.2",
