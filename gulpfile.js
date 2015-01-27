@@ -10,6 +10,16 @@ var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
 var livereload = require('gulp-livereload');
+var aliasify = require('aliasify');
+
+//replace the server transport with the client transport
+aliasify = aliasify.configure({
+  aliases: {
+    "./transport/server.js": "./api/transport/client.js"
+  },
+  configDir: __dirname,
+  verbose: true
+});
 
 var dependencies = [
     'react'
@@ -18,7 +28,7 @@ var dependencies = [
 function browserifyTask (options) {
    var appBundler = browserify({
       entries: [options.src], // The entry file
-      transform: [reactify], // Convert JSX style
+      transform: [reactify, aliasify], // Convert JSX style
       debug: options.development, // Sourcemapping
       cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
     });

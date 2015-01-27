@@ -1,6 +1,8 @@
 var app;
 var React = require('react');
 var SignIn = require('../components/SignIn.jsx');
+var userStore = require('../stores/userStore')();
+
 
 var HelloMessage = React.createClass({
 
