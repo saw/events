@@ -9,7 +9,6 @@ function makePromise() {
 module.exports = {
 	post: function(params) {
 		var doc = params;
-		console.log(params);
 		doc.collection = 'users';
 		return storage.insert(doc);
 	},

@@ -32,8 +32,7 @@ router.all('/:namespace/:id?', function (req, res, next) {
 			res.json(resp);
 		}
 	});
-	// console.log(req.body);
-	// res.end('d');
+
 });
 
 

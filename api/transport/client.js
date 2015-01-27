@@ -16,7 +16,8 @@ module.exports = {
 		var r = request[method](host + namespace);
 
 		if(method === 'post' || method === 'put') {
-			r = r.send('blah');
+			delete params.id;
+			r = r.send(params);
 		}
 
 		r.end(function(res) {
