@@ -50,6 +50,11 @@ function browserifyTask (options) {
 
     rebundle();
 
+    if (options.development) {
+      appBundler = watchify(appBundler);
+      appBundler.on('update', rebundle);
+    }
+
 }
 
 // Starts our development workflow
