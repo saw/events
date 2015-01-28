@@ -2,7 +2,7 @@ var app;
 var React = require('react');
 var SignIn = require('../components/SignIn.jsx');
 var userStore = require('../stores/userStore')();
-
+var Nav = require('../components/nav.jsx');
 
 var HelloMessage = React.createClass({
 
@@ -23,10 +23,13 @@ var HelloMessage = React.createClass({
       }
       return (
          <div>
-            <h1>Hello, {hello}</h1>
-            <a href="/about">about</a>
-            <SignIn user={this.props.ctx.user}/>
-            <button onClick={this.doStuff}>Stuff</button>
+            <Nav/>
+            <div className="main">
+               <h1>Hello, {hello}</h1>
+               <a href="/about">about</a>
+               <SignIn user={this.props.ctx.user}/>
+               <button onClick={this.doStuff}>Stuff</button>
+            </div>
          </div>
       );
    }

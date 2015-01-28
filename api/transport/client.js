@@ -13,13 +13,12 @@ module.exports = {
 			url += '/' + id;
 		}
 
-		var r = request[method](host + namespace);
 
+		var r = request[method](host + namespace);
 		if(method === 'post' || method === 'put') {
 			delete params.id;
 			r = r.send(params);
 		}
-
 		r.end(function(res) {
 			p.resolve(res.body);
 		});

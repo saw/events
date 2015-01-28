@@ -5,6 +5,7 @@ module.exports = function(router) {
 	});
 
 	router.get('/about', function (req, res) {
+		console.log('about');
 		res.render('about', {ctx:req.ctx});
 	})
 }

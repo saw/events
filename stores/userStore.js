@@ -1,5 +1,6 @@
 var api = require('../api/api.js');
 var StoreFactory = require('./StoreFactory.js');
+var q = require('q');
 
 var UserStore = {
 
