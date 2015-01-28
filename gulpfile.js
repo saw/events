@@ -74,3 +74,11 @@ gulp.task('default', function () {
 
 });
 
+gulp.task('prod', function() {
+  browserifyTask({
+    development: false,
+    src: './client-app/index.js',
+    dest: './public/javascripts/min'
+  });
+});
+
