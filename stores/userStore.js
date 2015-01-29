@@ -1,6 +1,7 @@
 var api = require('../api/api.js');
 var StoreFactory = require('./StoreFactory.js');
 var q = require('q');
+var dispatcher;
 
 var UserStore = {
 
@@ -12,6 +13,7 @@ var UserStore = {
 	}
 };
 
-module.exports = function(initData) {
-	return StoreFactory(UserStore, initData);
+module.exports = function(initData, app) {
+	dispatcher = app.dispatcher;
+	return StoreFactory(UserStore, dispatcher, initData);
 }

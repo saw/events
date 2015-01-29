@@ -8,6 +8,7 @@ function makePromise() {
 
 module.exports = {
 	post: function(params, req) {
+		console.log('sht', params);
 		var doc = params;
 		doc.collection = 'notes';
 		return storage.insert(doc);

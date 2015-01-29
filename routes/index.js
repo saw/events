@@ -1,6 +1,7 @@
 module.exports = function(router) {
 
 	router.get('/', function (req, res) {
+		console.log('this far');
 	  	res.render('index', {ctx:req.ctx});
 	});
 
