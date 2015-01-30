@@ -25,15 +25,16 @@ var ListNotes = React.createClass({
       var output = [];
       if(this.state.notes) {
          this.state.notes.forEach(function(note) {
-            output.push(<dt>{note.title}</dt>);
-            output.push(<dd>{note.dateCreate}</dd>);
+            var cl = note.pending ?  'pending' : '';
+            console.log(note);
+            output.push(<dt className={cl}>{note.title}</dt>);
+            output.push(<dd className={cl}>{note.body}</dd>);
          });
       }
 
       return (
          <div>
             <dl>{output}</dl>
-            <pre>{this.state.notes.length}</pre>
          </div>
       );
    }

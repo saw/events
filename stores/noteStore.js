@@ -47,8 +47,12 @@ var NoteStore = {
 	},
 
 	_createNote: function(noteConfig) {
+
+		var p = api.callMethod('note', 'post', noteConfig);
+		noteConfig.pending = true;
 		this._data.notes.push(noteConfig);
-		return api.callMethod('note', 'post', noteConfig);
+		this.emit('change');
+		return p;
 	}
 };
 

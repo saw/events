@@ -16,6 +16,7 @@ var CreateEditNote = React.createClass({
    },
 
    handleFormChange: function(e) {
+
       if(e.target.name === 'title') {
          this.setState({title:e.target.value});
       } else {
@@ -25,10 +26,13 @@ var CreateEditNote = React.createClass({
 
    handleSubmit: function(e) {
       e.preventDefault();
-      console.log(this.props.ctx);
       this.props.ctx.stores.noteStore.addNote({
          title: this.state.title,
          body: this.state.body
+      });
+      this.setState({
+         title:'',
+         body:''
       });
 
    },
@@ -40,7 +44,7 @@ var CreateEditNote = React.createClass({
          <div>
             <form onSubmit={this.handleSubmit}>
                <p><input type="text" onChange={this.handleFormChange} name="title" placeholder="title" value={this.state.title}/></p>
-               <p><input type="text" onChange={this.handleFormChange} name="body" placeholder="body" value={this.state.body}/></p>
+               <p><textarea onChange={this.handleFormChange} name="body" value={this.state.body}></textarea></p>
                <input type="submit" value="submit"/>
             </form>
          </div>
