@@ -5,11 +5,13 @@ var routes = require('../routes/index.js')(router);
 
 
 content.addEventListener('click', function(e) {
+
 	if(e.target.tagName === 'A' && e.target.href) {
 		if(router.route(e.target.pathname)) {
 			e.preventDefault();
 			window.history.pushState({},null, e.target.pathname);
 		} else {
+
 			console.log('no route', e.target.pathname);
 		}
 

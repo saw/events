@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var microevent = require('microevent');
+var events = require('events');
 
 var StoreFactory = function(config, dispatcher, initData) {
 		var d = _.cloneDeep(initData);
@@ -17,9 +18,9 @@ var StoreFactory = function(config, dispatcher, initData) {
 		};
 
 		_.mixin(iface, config);
+		_.mixin(iface, new events.EventEmitter);
 
 		iface.prototype = function(){};
-		microevent.mixin(iface);
 
 		return iface;
 };

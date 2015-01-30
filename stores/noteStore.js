@@ -1,7 +1,6 @@
 var api = require('../api/api.js');
 var StoreFactory = require('./StoreFactory.js');
-
-var q = require('q');
+var Q = require('q');
 
 var NoteStore = {
 
@@ -9,8 +8,37 @@ var NoteStore = {
 		return api.callMethod('note', 'get', {id:id});
 	},
 	getNotesForUser: function(ownerId) {
-		return api.callMethod('user', 'get', {ownerId:ownerId});
+		var p = Q.defer();
+		var self = this;
+		if(!self._data.notes) {
+			api.callMethod('note', 'get', {owner:ownerId})
+			.then(function(resp) {
+				self._data.notes = resp;
+				p.resolve(resp);
+				self.emit('change');
+			});
+		} else {
+			setTimeout(function() {
+				p.resolve(self._data.notes);
+				self.emit('change');
+			}, 0);
+		}
+
+		return p.promise;
+
+
 	},
+
+	refresh: function(ownerId) {
+		console.log('refreshing');
+		delete this._data.notes;
+		this.getNotesForUser(ownerId);
+	},
+	//synchronous
+	getCachedNotesForUser: function(ownerId) {
+		return this._data.notes;
+	},
+
 	addNote: function(noteConfig) {
 		return this._dispatcher.dispatch({
 			eventName: 'new-note',
@@ -19,6 +47,7 @@ var NoteStore = {
 	},
 
 	_createNote: function(noteConfig) {
+		this._data.notes.push(noteConfig);
 		return api.callMethod('note', 'post', noteConfig);
 	}
 };
@@ -30,12 +59,15 @@ module.exports = function(initData, appContext) {
 		userId = appContext.user._id;
 	}
 	var store = StoreFactory(NoteStore, dispatcher, initData);
+
 	dispatcher.register(function(payload) {
 		switch(payload.eventName) {
 			case 'new-note':
 				payload.newNote.owner = userId;
+
 				store._createNote(payload.newNote).then(function() {
-					store.trigger('change');
+					store.emit('change');
+					store.refresh(userId);
 				});
 
 				break;
