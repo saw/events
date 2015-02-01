@@ -51,11 +51,10 @@ function get(id) {
 	return p.promise;
 }
 
-function find(query) {
-	var p = Q.defer();
-	console.log('finding', db);
-	db.find(query, function(err, doc) {
-		console.log(arguments);
+// wrap up that promise, send it along
+function queryCb(p) {
+
+	return function(err, doc) {
 		if(err) {
 			p.reject(new Error(err));
 		} else {
@@ -64,9 +63,19 @@ function find(query) {
 			} else {
 				p.resolve();
 			}
-
 		}
-	});
+	}
+}
+
+
+function find(query, limit) {
+	var p = Q.defer();
+	if(limit) {
+		db.find(query).limit(limit).exec(queryCb(p));
+	} else {
+		db.find(query, queryCb(p));
+	}
+	
 
 	return p.promise;
 }

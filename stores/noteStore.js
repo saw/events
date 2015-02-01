@@ -50,7 +50,7 @@ var NoteStore = {
 
 		var p = api.callMethod('note', 'post', noteConfig);
 		noteConfig.pending = true;
-		this._data.notes.push(noteConfig);
+		this._data.notes.unshift(noteConfig);
 		this.emit('change');
 		return p;
 	}

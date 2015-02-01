@@ -1,40 +1,52 @@
 
 var React = require('react');
-
+var Note = require('./Note.jsx');
 var ListNotes = React.createClass({
 
    getInitialState: function() {
-      var self = this;
       return {
-         notes:this.props.ctx.stores.noteStore.getCachedNotesForUser(self.props.ctx.user._id)
+         filter:'',
+         notes:this.props.ctx.stores.noteStore.getCachedNotesForUser(this.props.ctx.user._id)
       }
+      
    },
 
    notesChanged: function() {
       var self = this;
-      console.log(15, this.props.ctx.stores.noteStore.getCachedNotesForUser(self.props.ctx.user._id));
       this.setState({notes:this.props.ctx.stores.noteStore.getCachedNotesForUser(self.props.ctx.user._id)});
    },
 
    componentDidMount: function() {
-      console.log('did mount');
       this.props.ctx.stores.noteStore.on('change', this.notesChanged);
+   },
+
+   filter: function (e) {
+      this.setState({
+         filter:e.target.value
+      });
    },
 
    render: function() {
       var output = [];
+      var useFilter = this.state.filter ? true : false;
+      var x = Math.random();
       if(this.state.notes) {
+         var self = this;
+
          this.state.notes.forEach(function(note) {
-            var cl = note.pending ?  'pending' : '';
-            console.log(note);
-            output.push(<dt className={cl}>{note.title}</dt>);
-            output.push(<dd className={cl}>{note.body}</dd>);
+               if(!self.state.filter || note.body.indexOf(self.state.filter) !== -1){
+                  output.push(<Note note={note} highlight={self.state.filter}/>);   
+               }
          });
       }
 
       return (
          <div>
-            <dl>{output}</dl>
+            <form>
+               <label for="filter">Search:</label>
+               <input onChange={this.filter} type="text" name="filter" placeholder="find"/>
+            </form>
+            {output}
          </div>
       );
    }
