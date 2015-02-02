@@ -102,7 +102,7 @@ app.use('/api', require('./api/index.js'));
 var head = fs.readFileSync('./views/head.html', 'utf-8');
 app.use('/', function(req, res, next) {
     var data = head;
-    console.log(head);
+    
     res.write(head);
     // res.end();
     next();
