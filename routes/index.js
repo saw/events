@@ -1,13 +1,18 @@
 module.exports = function(router) {
 
 	router.get('/', function (req, res) {
-		console.log('this far');
-	  	res.render('index', {ctx:req.ctx});
+
+		res.render('index',{ctx:req.ctx}, function(err, html) {
+			res.write(html);
+			res.end();
+		});
 	});
 
 	router.get('/about', function (req, res) {
-		console.log('about');
-		res.render('about', {ctx:req.ctx});
+		res.render('about', {ctx:req.ctx}m function(err, html) {
+			res.write(html);
+			res.end();
+		});
 	});
 
 	router.get('/mynotes', function (req, res) {
@@ -15,11 +20,12 @@ module.exports = function(router) {
 			res.end('fail');
 			return;
 		}
-		console.log('note store', req.ctx.stores.noteStore);
-		console.log(req.user);
 		req.ctx.stores.noteStore.getNotesForUser(req.user._id).then(function() {
-			console.log("then 19");
-			res.render('mynotes', {ctx:req.ctx});
+
+			res.render('mynotes', {ctx:req.ctx}, function(err, html) {
+				res.write(html);
+				res.end();
+			});
 		});
 	});
 }
