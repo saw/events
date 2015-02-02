@@ -9,7 +9,7 @@ module.exports = function(router) {
 	});
 
 	router.get('/about', function (req, res) {
-		res.render('about', {ctx:req.ctx}m function(err, html) {
+		res.render('about', {ctx:req.ctx}, function(err, html) {
 			res.write(html);
 			res.end();
 		});
