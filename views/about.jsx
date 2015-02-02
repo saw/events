@@ -28,12 +28,14 @@ var About = React.createClass({
 
       return (
          <div>
-            <Nav/>
-            <div className="main">
-               <h1>Actually.</h1>
-               <p>This is about using react on the server</p>
-               <p>Registered users:</p>
-               <ul>{this.state.users.map(createItem)}</ul>
+            <Nav ctx={this.props.ctx}/>
+            <div className="main pure-g">
+               <div className="pure-u-1 pure-u-md-2-3 pure-u-lrg-1-2">
+                  <h1>Actually</h1>
+                  <p>This is about using react on the server</p>
+                  <p>Registered users:</p>
+                  <ul>{this.state.users.map(createItem)}</ul>
+               </div>
             </div>
          </div>
       );

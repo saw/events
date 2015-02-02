@@ -1,0 +1,22 @@
+#content {
+	text-align: center;
+	padding: 0;
+
+	@include breakpoint(phablet) {
+		padding: 10px;
+	}
+	@include breakpoint(laptop) {
+		padding: 20px;
+	}
+}
+
+.header {
+	text-align: left;
+}
+
+.main {
+	max-width: 1024px;
+	margin: auto;
+	padding: 0 5px;
+	text-align: left;
+}

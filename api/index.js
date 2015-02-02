@@ -23,8 +23,9 @@ router.all('/:namespace/:id?', function (req, res, next) {
 	}
 
 	paramData = _.merge(paramData, req.body);
+	paramData = _.merge(paramData, req.query);
 
-	api.callMethod(req.params.namespace, method, paramData).then(function(resp, err) {
+	api.callMethod(req.params.namespace, method, paramData, req).then(function(resp, err) {
 		if(err) {
 			res.status(500);
 			res.json(err);

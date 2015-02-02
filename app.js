@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var router = express.Router();
+var fs = require('fs');
 var routes = require('./routes/index.js')(router);
 
 var app = express();
@@ -94,9 +95,18 @@ app.set('view engine', 'jsx'); // register the template engine
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(require('./lib/app-context.js'));
+app.use(require('./lib/app-context.js')(app));
 
 app.use('/api', require('./api/index.js'));
+
+var head = fs.readFileSync('./views/head.html', 'utf-8');
+app.use('/', function(req, res, next) {
+    var data = head;
+    
+    res.write(head);
+    // res.end();
+    next();
+})
 app.use('/', router);
 
 
