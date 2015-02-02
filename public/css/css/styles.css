@@ -1,0 +1,8 @@
+@import url(vendor/pure/base.css);
+body {
+  background: red; }
+  body .foo {
+    background: blue; }
+
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNzcy9zdHlsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxBQUNBO0VBQ0MsQUFBWTtFQUFiLEFBQUs7SUFFSCxBQUFZIiwiZmlsZSI6ImNzcy9zdHlsZXMuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCAndmVuZG9yL3B1cmUvYmFzZS5jc3MnO1xuYm9keSB7XG5cdGJhY2tncm91bmQ6IHJlZDtcblx0LmZvbyB7XG5cdFx0YmFja2dyb3VuZDogYmx1ZTtcblx0fVxufSJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ== */

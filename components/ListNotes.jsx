@@ -34,7 +34,7 @@ var ListNotes = React.createClass({
          var self = this;
 
          this.state.notes.forEach(function(note) {
-               if(!self.state.filter || note.body.indexOf(self.state.filter) !== -1){
+               if(!self.state.filter || note.body.match(new RegExp(self.state.filter, 'gi'))){
                   output.push(<Note note={note} highlight={self.state.filter}/>);   
                }
          });

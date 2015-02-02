@@ -19,11 +19,17 @@ var HelloMessage = React.createClass({
 
       return (
          <div>
-            <Nav/>
-            <div className="main">
-               <h1>Notes?</h1>
-               <NoteForm ctx={this.props.ctx}/>
-               <MyNotes ctx={this.props.ctx}/>
+            <Nav ctx={this.props.ctx}/>
+            <div className="main pure-g">
+               <div className="pure-u-1">
+                  <h1>My Notes</h1>
+               </div>
+               <div className="pure-u-1 pure-u-md-1-3 pure-u-lrg-1-4">
+                  <div><NoteForm ctx={this.props.ctx}/></div>
+               </div>
+               <div className="pure-u-1 pure-u-md-2-3 pure-u-lrg-3-4">
+                  <MyNotes ctx={this.props.ctx}/>
+               </div>
             </div>
          </div>
       );

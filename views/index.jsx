@@ -1,6 +1,5 @@
 var app;
 var React = require('react');
-var SignIn = require('../components/SignIn.jsx');
 var Nav = require('../components/nav.jsx');
 var NoteForm = require('../components/CreateEditNote.jsx');
 
@@ -18,19 +17,20 @@ var HelloMessage = React.createClass({
       var hello, note = '';
       if(this.props.ctx.signedIn)  {
          hello = this.props.ctx.user.displayName;
-         note = (<NoteForm ctx={this.props.ctx}/>);
+         note = (<div className="pure-u-1 pure-u-md-1-3 pure-u-lrg-1-4"><NoteForm ctx={this.props.ctx}/></div>);
       } else {
          hello = 'stranger';
       }
 
       return (
          <div>
-            <Nav/>
-            <div className="main">
-               <h1>Hello, {hello}</h1>
-               <a href="/about">about</a>
-               <SignIn user={this.props.ctx.user}/>
+            <Nav ctx={this.props.ctx}/>
+            <div className="main pure-g">
                {note}
+               <div className="pure-u-1 pure-u-md-2-3 pure-u-lrg-1-4">
+                  <h1>Hello, {hello}</h1>
+                  <p>This is an example of an isomorphic app with react. This app lets you create notes. Then you can look at them.</p>
+               </div>
             </div>
          </div>
       );

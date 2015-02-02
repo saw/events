@@ -11,6 +11,8 @@ var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
 var livereload = require('gulp-livereload');
 var aliasify = require('aliasify');
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 
 //replace the server transport with the client transport
 aliasify = aliasify.configure({
@@ -57,8 +59,38 @@ function browserifyTask (options) {
 
 }
 
+function cssTask(options) {
+  gulp.src(options.src)
+    .pipe(gulpif(options.development, sourcemaps.init()))
+    .pipe(sass())
+    .pipe(gulpif(options.development, sourcemaps.write()))
+    .pipe(gulp.dest(options.dest))
+    .pipe(gulpif(options.development, notify(function() {
+      console.log('you bet your sass this is dev mode');
+    })))
+    .pipe(notify(function() {
+      console.log('sass done');
+    }));
+}
+
+gulp.task('cssDev', function() {
+  cssTask({
+    development: true,
+    src: './assets/css/styles.scss',
+    dest: './public/css'
+  });
+});
+
+gulp.task('cssProd', function() {
+  cssTask({
+    development: false,
+    src: './assets/css/styles.scss',
+    dest: './public/css/min'
+  });
+})
+
 // Starts our development workflow
-gulp.task('default', function () {
+gulp.task('default',['cssDev'], function () {
 
   browserifyTask({
     development: true,
@@ -66,15 +98,11 @@ gulp.task('default', function () {
     dest: './public/javascripts'
   });
 
-  // cssTask({
-  //   development: true,
-  //   src: './styles/**/*.css',
-  //   dest: './build'
-  // });
+  gulp.watch('./assets/**/*.scss', ['cssDev']);
 
 });
 
-gulp.task('prod', function() {
+gulp.task('prod', ['cssProd'], function() {
   browserifyTask({
     development: false,
     src: './client-app/index.js',
